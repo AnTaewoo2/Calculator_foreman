@@ -173,6 +173,24 @@
     return state;
   }
 
+  var testVectors = {
+    addition: {
+      expression: "2 + 3",
+      expected: 5
+    },
+    decimal: {
+      expression: "1.5 * 2",
+      expected: 3
+    },
+    divisionByZero: {
+      expression: "8 / 0",
+      expected: "Error"
+    },
+    clear: {
+      expectedDisplay: "0"
+    }
+  };
+
   var CalculatorCore = {
     calculate: calculate,
     createState: createState,
@@ -181,10 +199,14 @@
     inputDecimal: inputDecimal,
     inputOperator: inputOperator,
     inputEquals: inputEquals,
-    press: press
+    press: press,
+    testVectors: testVectors
   };
 
   global.CalculatorCore = CalculatorCore;
+  if (typeof window !== "undefined") {
+    window.CalculatorCore = CalculatorCore;
+  }
 
   if (typeof document !== "undefined" && global.React && global.ReactDOM) {
     var e = global.React.createElement;
@@ -255,3 +277,4 @@
     }
   }
 })(typeof window !== "undefined" ? window : this);
+
